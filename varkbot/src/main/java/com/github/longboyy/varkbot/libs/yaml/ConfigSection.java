@@ -132,13 +132,24 @@ public class ConfigSection {
 		return string;
 	}
 	
-	public List<String> getStringList(String key) {
-		List<String> list = (ArrayList<String>)retrieve(key, List.class, false);
+	@SuppressWarnings("unchecked")
+	public List<String> getStringList(String key){
+		List<String> list = retrieve(key, List.class, false);
 		if(list == null) {
 			return new ArrayList<String>();
 		}
 		return list;
 	}
+	
+	/*
+	public List<String> getStringList(String key) {
+		List<String> list = retrieve(key, List.class, false);
+		if(list == null) {
+			return new ArrayList<String>();
+		}
+		return list;
+	}
+	*/
 
 	public boolean hasBoolean(String key) {
 		return retrieve(key, Boolean.class, false) != null;
@@ -151,7 +162,7 @@ public class ConfigSection {
 	public boolean hasString(String key) {
 		return retrieve(key, String.class, false) != null;
 	}
-	
+
 	public boolean hasStringList(String key) {
 		return retrieve(key, List.class, false) != null;
 	}

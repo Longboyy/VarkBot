@@ -31,8 +31,6 @@ public class VarkBotLoadAnnotationProcessor extends AbstractProcessor {
 
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-		System.out.println("IS THIS EVEN PROCESSING");
-		
 		if (roundEnv.processingOver()) {
 			return false;
 		}

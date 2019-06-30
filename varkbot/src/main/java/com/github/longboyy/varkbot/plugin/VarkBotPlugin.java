@@ -26,8 +26,15 @@ public abstract class VarkBotPlugin {
 	/**
 	 * @return This plugins YAML config file
 	 */
-	protected PluginConfig getConfig() {
+	public PluginConfig getConfig() {
 		return config;
+	}
+	
+	/**
+	 * @return This plugins YAML config file
+	 */
+	public VarkBot getVarkBot() {
+		return varkBot;
 	}
 
 	/**
@@ -115,7 +122,15 @@ public abstract class VarkBotPlugin {
 		}
 		this.varkBot = varkBot;
 		this.dataFolder = new File("plugins", name);
+		//File configFile = new File(dataFolder, "config.yml");
+		//this.config = new PluginConfig(varkBot.getLogger(), configFile, "/config.yml");
 		this.config = new PluginConfig(varkBot.getLogger(), new File(dataFolder, "config.yml"));
+		
+		/*
+		if(this.config.hasDefaultConfig() && !configFile.exists()) {
+			this.config.saveDefaultConfig();
+		}
+		*/
 	}
 
 	/**
