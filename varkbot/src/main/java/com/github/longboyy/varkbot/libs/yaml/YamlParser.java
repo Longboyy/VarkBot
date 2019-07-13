@@ -10,13 +10,14 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;
 
 public class YamlParser {
 
 	private static final String BLANK_CONFIG = "{}\n";
-	private static final Yaml yaml = new Yaml();
+	private static Yaml yaml;
 
 	private static void convertMapsToSections(Map<?, ?> input, ConfigSection section) {
 		for (Map.Entry<?, ?> entry : input.entrySet()) {
@@ -45,6 +46,13 @@ public class YamlParser {
 			input.close();
 		}
 		return sb.toString();
+	}
+	
+	public static void setup() {
+		DumperOptions options = new DumperOptions();
+		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+		options.setPrettyFlow(true);
+		yaml  = new Yaml(options);
 	}
 
 	public static ConfigSection loadFromFile(File f)

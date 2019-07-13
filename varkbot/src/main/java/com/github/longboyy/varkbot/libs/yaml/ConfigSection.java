@@ -141,6 +141,19 @@ public class ConfigSection {
 		return list;
 	}
 	
+	public float getFloat(String key) {
+		return retrieve(key, Float.class, true);
+	}
+	
+	public float getFloat(String key, float defaultValue) {
+		Float val = retrieve(key, Float.class, false);
+		if(val == null) {
+			return defaultValue;
+		}
+		
+		return val;
+	}
+	
 	/*
 	public List<String> getStringList(String key) {
 		List<String> list = retrieve(key, List.class, false);
@@ -165,6 +178,10 @@ public class ConfigSection {
 
 	public boolean hasStringList(String key) {
 		return retrieve(key, List.class, false) != null;
+	}
+	
+	public boolean hasFloat(String key) {
+		return retrieve(key, Float.class, false) != null;
 	}
 
 	private <T> void internalPut(String tag, T o) {
@@ -216,6 +233,14 @@ public class ConfigSection {
 	}
 
 	public void putString(String path, String value) {
+		internalPut(path, value);
+	}
+	
+	public void putStringList(String path, List<String> value) {
+		internalPut(path, value);
+	}
+	
+	public void putFloat(String path, float value) {
 		internalPut(path, value);
 	}
 

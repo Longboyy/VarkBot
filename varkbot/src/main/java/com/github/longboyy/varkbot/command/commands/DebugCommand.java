@@ -24,6 +24,10 @@ public class DebugCommand extends Command {
 
 	@Override
 	public void execute(VarkBot varkBot, TextChannel channel, Member sender, String[] args) {
+		if(channel != null && sender != null) {
+			channel.sendMessage("Shiver me tendies").queue();
+		}
+		
 		varkBot.getLogger().info("Shiver me tendies");
 	}
 

@@ -10,9 +10,14 @@ import org.apache.logging.log4j.Logger;
 
 import com.github.longboyy.varkbot.command.CommandHandler;
 import com.github.longboyy.varkbot.command.CommandLineReader;
+import com.github.longboyy.varkbot.command.CommandListener;
 import com.github.longboyy.varkbot.command.commands.DebugCommand;
+import com.github.longboyy.varkbot.command.commands.HelpCommand;
+import com.github.longboyy.varkbot.command.commands.StartPluginCommand;
+import com.github.longboyy.varkbot.command.commands.StopPluginCommand;
 import com.github.longboyy.varkbot.config.DefaultConfig;
 import com.github.longboyy.varkbot.database.DBConnection;
+import com.github.longboyy.varkbot.libs.yaml.YamlParser;
 import com.github.longboyy.varkbot.plugin.PluginManager;
 
 import net.dv8tion.jda.core.JDA;
@@ -37,9 +42,13 @@ public class VarkBot {
 		setupDatabase();
 		setupJDA();
 		pluginManager = new PluginManager(this);
-		pluginManager.executePlugin("Propaganda");
+		//pluginManager.executePlugin("Propaganda");
 		cmdHandler = new CommandHandler(this);
+		cmdHandler.registerCommand(new StartPluginCommand());
+		cmdHandler.registerCommand(new StopPluginCommand());
+		cmdHandler.registerCommand(new HelpCommand());
 		//cmdHandler.registerCommand(new DebugCommand());
+		jda.addEventListener(new CommandListener(logger, cmdHandler));
 		startCmdReading();
 	}
 	
@@ -74,6 +83,10 @@ public class VarkBot {
 		return connection;
 	}
 	
+	public PluginManager getPluginManager() {
+		return pluginManager;
+	}
+	
 	private void startCmdReading() {
 		new Thread(new Runnable() {
 
@@ -95,6 +108,7 @@ public class VarkBot {
 	}
 	
 	private void setupConfig() {
+		YamlParser.setup();
 		File file = new File("varkbot/config.yml");
 		defaultConfig = new DefaultConfig(logger, file, "/config.yml");
 		

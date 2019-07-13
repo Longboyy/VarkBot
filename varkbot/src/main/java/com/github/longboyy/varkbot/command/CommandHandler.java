@@ -1,6 +1,7 @@
 package com.github.longboyy.varkbot.command;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 
 public class CommandHandler {
 
-	private static final String COMMAND_CHAR = "!";
+	public static final String COMMAND_CHAR = ";";
 	
 	private Logger logger;
 	private VarkBot varkBot;
@@ -42,8 +43,6 @@ public class CommandHandler {
 			return;
 		}
 		
-		logger.info("Handling message: " + message);
-		
 		if(message.length() == 0) {
 			return;
 		}
@@ -58,6 +57,7 @@ public class CommandHandler {
 			}
 			
 			parts[0] = parts[0].substring(1, parts[0].length());
+			cmd = parts[0];
 		}
 		
 		if(!commands.containsKey(cmd)) {
@@ -67,6 +67,7 @@ public class CommandHandler {
 		Command command = commands.get(cmd);
 		
 		if(args.length < command.minArgs() || args.length > command.maxArgs()) {
+			logger.info("Incorrect number of args");
 			if(channel != null) {
 				channel.sendMessage("Usage:\n_"+command.getUsage()+" - "+command.getDescription()+"_").queue();
 			}
@@ -79,6 +80,10 @@ public class CommandHandler {
 		}
 		
 		command.execute(varkBot, channel, sender, args);
+	}
+	
+	public synchronized Collection<Command> getRegisteredCommands() {
+		return commands.values();
 	}
 	
 }
