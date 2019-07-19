@@ -26,6 +26,16 @@ public class PluginManager {
 		this.runningPlugins = new LinkedList<VarkBotPlugin>();
 		this.pluginService = PluginService.getInstance(varkBot.getLogger());
 		reloadPlugins();
+		
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+		    @Override
+		    public void run()
+		    {
+		    	shutDown();
+		    }
+		});
 	}
 
 	/**

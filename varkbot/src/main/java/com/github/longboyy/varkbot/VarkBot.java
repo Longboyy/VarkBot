@@ -1,7 +1,6 @@
 package com.github.longboyy.varkbot;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import javax.security.auth.login.LoginException;
 
@@ -11,12 +10,12 @@ import org.apache.logging.log4j.Logger;
 import com.github.longboyy.varkbot.command.CommandHandler;
 import com.github.longboyy.varkbot.command.CommandLineReader;
 import com.github.longboyy.varkbot.command.CommandListener;
-import com.github.longboyy.varkbot.command.commands.DebugCommand;
 import com.github.longboyy.varkbot.command.commands.HelpCommand;
 import com.github.longboyy.varkbot.command.commands.StartPluginCommand;
 import com.github.longboyy.varkbot.command.commands.StopPluginCommand;
 import com.github.longboyy.varkbot.config.DefaultConfig;
 import com.github.longboyy.varkbot.database.DBConnection;
+import com.github.longboyy.varkbot.libs.views.ViewHandler;
 import com.github.longboyy.varkbot.libs.yaml.YamlParser;
 import com.github.longboyy.varkbot.plugin.PluginManager;
 
@@ -33,6 +32,7 @@ public class VarkBot {
 	private CommandHandler cmdHandler;
 	private DefaultConfig defaultConfig;
 	private PluginManager pluginManager;
+	private ViewHandler viewHandler;
 	
 	private DBConnection connection;
 	
@@ -42,6 +42,7 @@ public class VarkBot {
 		setupDatabase();
 		setupJDA();
 		pluginManager = new PluginManager(this);
+		viewHandler = new ViewHandler(this);
 		//pluginManager.executePlugin("Propaganda");
 		cmdHandler = new CommandHandler(this);
 		cmdHandler.registerCommand(new StartPluginCommand());
@@ -85,6 +86,10 @@ public class VarkBot {
 	
 	public PluginManager getPluginManager() {
 		return pluginManager;
+	}
+	
+	public ViewHandler getViewHandler() {
+		return viewHandler;
 	}
 	
 	private void startCmdReading() {

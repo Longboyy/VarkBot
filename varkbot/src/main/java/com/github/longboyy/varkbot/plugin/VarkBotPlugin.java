@@ -31,7 +31,7 @@ public abstract class VarkBotPlugin {
 	}
 	
 	/**
-	 * @return This plugins YAML config file
+	 * @return VarkBot instance
 	 */
 	public VarkBot getVarkBot() {
 		return varkBot;
