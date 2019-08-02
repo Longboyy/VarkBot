@@ -42,7 +42,7 @@ public class StartPluginCommand extends Command {
 
 	@Override
 	public boolean hasPermission(Member sender) {
-		return false;
+		return sender == null;
 	}
 
 }

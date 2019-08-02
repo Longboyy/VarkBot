@@ -3,6 +3,7 @@ package com.github.longboyy.varkbot.plugin;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -89,6 +90,10 @@ public class PluginManager {
 
 	public VarkBotPlugin getPlugin(String name) {
 		return plugins.get(name.toLowerCase());
+	}
+	
+	public List<VarkBotPlugin> getRunningPlugins() {
+		return new ArrayList<>(runningPlugins);
 	}
 
 	private void registerPlugin(VarkBotPlugin plugin) {

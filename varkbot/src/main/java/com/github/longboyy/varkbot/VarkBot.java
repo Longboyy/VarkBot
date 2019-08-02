@@ -11,6 +11,7 @@ import com.github.longboyy.varkbot.command.CommandHandler;
 import com.github.longboyy.varkbot.command.CommandLineReader;
 import com.github.longboyy.varkbot.command.CommandListener;
 import com.github.longboyy.varkbot.command.commands.HelpCommand;
+import com.github.longboyy.varkbot.command.commands.ReloadCommand;
 import com.github.longboyy.varkbot.command.commands.StartPluginCommand;
 import com.github.longboyy.varkbot.command.commands.StopPluginCommand;
 import com.github.longboyy.varkbot.config.DefaultConfig;
@@ -47,6 +48,7 @@ public class VarkBot {
 		cmdHandler = new CommandHandler(this);
 		cmdHandler.registerCommand(new StartPluginCommand());
 		cmdHandler.registerCommand(new StopPluginCommand());
+		cmdHandler.registerCommand(new ReloadCommand());
 		cmdHandler.registerCommand(new HelpCommand());
 		//cmdHandler.registerCommand(new DebugCommand());
 		jda.addEventListener(new CommandListener(logger, cmdHandler));

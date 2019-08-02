@@ -7,35 +7,27 @@ import com.github.longboyy.varkbot.plugin.VarkBotPlugin;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-public class StopPluginCommand extends Command {
-
-	public StopPluginCommand() {
-		super("stopplugin", 1, 1);
+public class ReloadCommand extends Command {
+	
+	public ReloadCommand() {
+		super("reload", 0, 0);
 	}
 
 	@Override
 	public String getUsage() {
-		return "stopplugin [plugin_name]";
+		return "reload";
 	}
 
 	@Override
 	public String getDescription() {
-		return "Stops a plugin with the given name";
+		return "Reloads the config for all running plugins.";
 	}
 
 	@Override
 	public void execute(VarkBot varkBot, TextChannel channel, Member sender, String[] args) {
-		String pluginName = args[0].toLowerCase();
 		
-		//varkBot.getLogger().info("Attempting to load " + pluginName);
-		
-		if(varkBot.getPluginManager().getPlugin(pluginName) != null) {
-			boolean success = varkBot.getPluginManager().stopPlugin(pluginName);
-			if(success) {
-				varkBot.getLogger().info("Stopped " + pluginName);
-			}else {
-				varkBot.getLogger().info("Failed to stop " + pluginName);
-			}
+		for(VarkBotPlugin plugin : varkBot.getPluginManager().getRunningPlugins()) {
+			plugin.getConfig().reloadConfig();
 		}
 		
 	}
@@ -44,5 +36,5 @@ public class StopPluginCommand extends Command {
 	public boolean hasPermission(Member sender) {
 		return sender == null;
 	}
-
+	
 }
