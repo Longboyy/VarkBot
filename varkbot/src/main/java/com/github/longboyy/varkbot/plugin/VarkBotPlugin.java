@@ -2,6 +2,8 @@ package com.github.longboyy.varkbot.plugin;
 
 import java.io.File;
 
+import org.apache.logging.log4j.Logger;
+
 import com.github.longboyy.varkbot.VarkBot;
 import com.github.longboyy.varkbot.libs.yaml.config.PluginConfig;
 
@@ -12,12 +14,12 @@ import com.github.longboyy.varkbot.libs.yaml.config.PluginConfig;
  * default constructor alone
  *
  */
-public abstract class VarkBotPlugin {
+public abstract class VarkBotPlugin<T extends PluginConfig> {
 
 	protected boolean running = false;
 	protected boolean finished = false;
 	protected VarkBot varkBot;
-	protected PluginConfig config;
+	protected T config;
 	private File dataFolder;
 
 	protected VarkBotPlugin() {
@@ -26,7 +28,7 @@ public abstract class VarkBotPlugin {
 	/**
 	 * @return This plugins YAML config file
 	 */
-	public PluginConfig getConfig() {
+	public T getConfig() {
 		return config;
 	}
 	
@@ -102,18 +104,6 @@ public abstract class VarkBotPlugin {
 	void loadConfig() {
 		config.reloadConfig();
 	}
-
-	/*
-	void setConnection(ServerConnection connection) {
-		this.connection = connection;
-		String name = getName();
-		if (name == null) {
-			throw new IllegalStateException("Plugin was initialized without valid name");
-		}
-		this.dataFolder = new File(connection.getDataFolder(), name);
-		this.config = new PluginConfig(connection.getLogger(), new File(dataFolder, "config.yml"));
-	}
-	*/
 	
 	void setVarkBot(VarkBot varkBot) {
 		String name = getName();
@@ -122,15 +112,7 @@ public abstract class VarkBotPlugin {
 		}
 		this.varkBot = varkBot;
 		this.dataFolder = new File("plugins", name);
-		//File configFile = new File(dataFolder, "config.yml");
-		//this.config = new PluginConfig(varkBot.getLogger(), configFile, "/config.yml");
-		this.config = new PluginConfig(varkBot.getLogger(), new File(dataFolder, "config.yml"));
-		
-		/*
-		if(this.config.hasDefaultConfig() && !configFile.exists()) {
-			this.config.saveDefaultConfig();
-		}
-		*/
+		this.config = createConfig(varkBot.getLogger(), new File(dataFolder, "config.yml"));
 	}
 
 	/**
@@ -153,4 +135,6 @@ public abstract class VarkBotPlugin {
 	 * Called automatically when the plugin is stopped, do any eventual tear down in this method
 	 */
 	public abstract void stop();
+	
+	protected abstract T createConfig(Logger logger, File file);
 }
