@@ -20,9 +20,9 @@ import com.github.longboyy.varkbot.libs.views.ViewHandler;
 import com.github.longboyy.varkbot.libs.yaml.YamlParser;
 import com.github.longboyy.varkbot.plugin.PluginManager;
 
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 public class VarkBot {
 
@@ -106,9 +106,12 @@ public class VarkBot {
 	
 	private void setupJDA() {
 		try {
-			jda = new JDABuilder().setToken(getConfig().getDiscordToken()).setGame(Game.watching(getConfig().getDiscordGame())).build();
-		} catch (LoginException e) {
+			jda = JDABuilder.createDefault(getConfig().getDiscordToken())
+					.setActivity(Activity.watching(getConfig().getDiscordGame())).build();
+			jda.awaitReady();
+		} catch (LoginException | InterruptedException e) {
 			logger.error("Error whilst connecting to discord.", e.getMessage());
+			e.printStackTrace();
 			System.exit(0);
 		}
 		logger.info("Connected to discord.");

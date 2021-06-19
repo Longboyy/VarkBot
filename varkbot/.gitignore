@@ -77,6 +77,7 @@ local.properties
 
 # Log file
 *.log
+*.log.gz
 
 # BlueJ files
 *.ctxt
@@ -98,3 +99,7 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
 /target/
+
+/varkbot/
+/plugins/
+/logs/

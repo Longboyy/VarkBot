@@ -1,6 +1,6 @@
 package com.github.longboyy.varkbot.libs.views;
 
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
 
 public abstract class ViewButton {
 

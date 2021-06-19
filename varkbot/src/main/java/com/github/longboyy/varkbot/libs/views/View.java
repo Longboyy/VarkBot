@@ -3,9 +3,9 @@ package com.github.longboyy.varkbot.libs.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 public class View {
 	/*

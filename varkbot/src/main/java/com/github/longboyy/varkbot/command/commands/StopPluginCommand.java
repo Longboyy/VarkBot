@@ -4,8 +4,8 @@ import com.github.longboyy.varkbot.VarkBot;
 import com.github.longboyy.varkbot.command.Command;
 import com.github.longboyy.varkbot.plugin.VarkBotPlugin;
 
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 public class StopPluginCommand extends Command {
 

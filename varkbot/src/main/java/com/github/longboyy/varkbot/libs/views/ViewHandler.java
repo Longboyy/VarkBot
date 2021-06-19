@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.github.longboyy.varkbot.VarkBot;
 
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class ViewHandler extends ListenerAdapter {
 	

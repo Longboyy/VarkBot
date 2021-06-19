@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.github.longboyy.varkbot.VarkBot;
 
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 public class CommandHandler {
 

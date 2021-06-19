@@ -3,8 +3,8 @@ package com.github.longboyy.varkbot.command.commands;
 import com.github.longboyy.varkbot.VarkBot;
 import com.github.longboyy.varkbot.command.Command;
 
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 public class DebugCommand extends Command {
 
