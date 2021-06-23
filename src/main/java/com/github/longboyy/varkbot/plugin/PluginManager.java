@@ -43,7 +43,6 @@ public class PluginManager {
 	 * Starts a plugin and returns the plugin started
 	 *
 	 * @param pluginName Name of the plugin to start
-	 * @param args       Arguments to pass to the plugin on startup
 	 * @return Created plugin instance
 	 */
 	public VarkBotPlugin executePlugin(String pluginName) {
@@ -102,7 +101,7 @@ public class PluginManager {
 		VarkBotLoad pluginAnnotation = pluginClass.getAnnotation(VarkBotLoad.class);
 		if (pluginAnnotation == null) {
 			varkBot.getLogger()
-					.warn("Plugin " + plugin.getClass().getName() + " had no AngeliaLoad annotation, it was ignored");
+					.warn("Plugin " + plugin.getClass().getName() + " had no VarkBotLoad annotation, it was ignored");
 			return;
 		}
 		Constructor<?> constr = pluginClass.getConstructors()[0];
@@ -139,7 +138,7 @@ public class PluginManager {
 	}
 
 	/**
-	 * Finishes the plugin with the given name
+	 * Shuts down the plugin with the given name
 	 *
 	 * @param name Name of the plugin to stop
 	 * @return Whether a plugin was stopped

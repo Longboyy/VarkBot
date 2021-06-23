@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import com.github.longboyy.varkbot.command.CommandHandler;
 import com.github.longboyy.varkbot.command.CommandLineReader;
 import com.github.longboyy.varkbot.command.CommandListener;
+import com.github.longboyy.varkbot.command.commands.DebugCommand;
 import com.github.longboyy.varkbot.command.commands.HelpCommand;
 import com.github.longboyy.varkbot.command.commands.ReloadCommand;
 import com.github.longboyy.varkbot.command.commands.StartPluginCommand;
@@ -50,7 +51,7 @@ public class VarkBot {
 		cmdHandler.registerCommand(new StopPluginCommand());
 		cmdHandler.registerCommand(new ReloadCommand());
 		cmdHandler.registerCommand(new HelpCommand());
-		//cmdHandler.registerCommand(new DebugCommand());
+		cmdHandler.registerCommand(new DebugCommand());
 		jda.addEventListener(new CommandListener(logger, cmdHandler));
 		startCmdReading();
 	}
